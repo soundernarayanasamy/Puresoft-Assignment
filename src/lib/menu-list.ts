@@ -1,9 +1,9 @@
 import {
-  Tag,
-  Users,
+  Activity,
   Settings,
-  Bookmark,
-  SquarePen,
+  Users ,
+  Lightbulb,
+  Zap ,
   LayoutGrid,
   LucideIcon
 } from "lucide-react";
@@ -33,54 +33,45 @@ export function getMenuList(pathname: string): Group[] {
       groupLabel: "",
       menus: [
         {
-          href: "/dashboard",
-          label: "Dashboard",
+          href: "/reports",
+          label: "Reports",
           icon: LayoutGrid,
           submenus: []
         }
       ]
     },
     {
-      groupLabel: "Contents",
+      groupLabel: "",
       menus: [
+
         {
-          href: "",
-          label: "Posts",
-          icon: SquarePen,
-          submenus: [
-            {
-              href: "/posts",
-              label: "All Posts"
-            },
-            {
-              href: "/posts/new",
-              label: "New Post"
-            }
-          ]
+          href: "/#",
+          label: "Library",
+          icon: Zap 
         },
         {
-          href: "/categories",
-          label: "Categories",
-          icon: Bookmark
+          href: "/#",
+          label: "People",
+          icon: Users 
         },
         {
-          href: "/tags",
-          label: "Tags",
-          icon: Tag
+          href: "/#",
+          label: "Activities",
+          icon: Activity
         }
       ]
     },
     {
-      groupLabel: "Settings",
+      groupLabel: "Support",
       menus: [
         {
-          href: "/users",
-          label: "Users",
-          icon: Users
+          href: "/#",
+          label: "Get Started",
+          icon: Lightbulb
         },
         {
-          href: "/account",
-          label: "Account",
+          href: "/#",
+          label: "Settings",
           icon: Settings
         }
       ]

@@ -20,7 +20,7 @@ export function Sidebar() {
         settings.disabled && "hidden"
       )}
     >
-      <SidebarToggle isOpen={isOpen} setIsOpen={toggleOpen} />
+      
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
@@ -44,7 +44,7 @@ export function Sidebar() {
                   : "translate-x-0 opacity-100"
               )}
             >
-              Brand
+              TESLA
             </h1>
           </Link>
         </Button>
