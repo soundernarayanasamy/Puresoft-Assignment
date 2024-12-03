@@ -1,4 +1,3 @@
-// server.js
 const corsAnywhere = require('cors-anywhere');
 const host = 'localhost';
 const port = 8080;
