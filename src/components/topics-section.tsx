@@ -1,41 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import Image from "next/image"
 import data from '@/json-data/task-data.json'
-const weakestTopics = [
-  {
-    name: "Food Safrtyukety",
-    percentage:2274,
-    color: "bg-orange-500"
-  },
-  {
-    name: "Compliancetfgu Basics Procedures",
-    percentage: 52222,
-    color: "bg-orange-500"
-  },
-  {
-    name: "Company tgNetworking",
-    percentage: 322226,
-    color: "bg-orange-500"
-  }
-]
-
-const strongestTopics = [
-  {
-    name: "Covid Protocols",
-    percentage: 922225,
-    color: "bg-green-500"
-  },
-  {
-    name: "Cyber Security Basics",
-    percentage: 922222,
-    color: "bg-green-500"
-  },
-  {
-    name: "Social Media Policies",
-    percentage: 822228,
-    color: "bg-green-500"
-  }
-]
 
 export function TopicsSection() {
   return (
@@ -60,9 +24,9 @@ export function TopicsSection() {
                     <span className="text-muted-foreground">{topic.correct_percentage}% Correct</span>
                   </div>
                   <div className="h-2 bg-secondary rounded-full">
-                    <div 
-                      className={`h-2 bg-orange-500 rounded-full`} 
-                      style={{ width: `${topic.correct_percentage}%` }} 
+                    <div
+                      className={`h-2 bg-orange-500 rounded-full`}
+                      style={{ width: `${topic.correct_percentage}%` }}
                     />
                   </div>
                 </div>
@@ -72,7 +36,7 @@ export function TopicsSection() {
           </div>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader>
           <CardTitle>Strongest Topics</CardTitle>
@@ -92,9 +56,9 @@ export function TopicsSection() {
                     <span className="text-muted-foreground">{topic.correct_percentage}% Correct</span>
                   </div>
                   <div className="h-2 bg-secondary rounded-full">
-                    <div 
-                      className={`h-2 bg-green-500 rounded-full`} 
-                      style={{ width: `${topic.correct_percentage}%` }} 
+                    <div
+                      className={`h-2 bg-green-500 rounded-full`}
+                      style={{ width: `${topic.correct_percentage}%` }}
                     />
                   </div>
                 </div>
@@ -106,4 +70,3 @@ export function TopicsSection() {
     </div>
   )
 }
-

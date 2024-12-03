@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowDown, ArrowUp } from 'lucide-react'
-
 import data from "@/json-data/task-data.json"
 
 export function Leaderboards() {

@@ -1,6 +1,5 @@
 "use client";
 import { Menu } from "@/components/admin-panel/menu";
-import { SidebarToggle } from "@/components/admin-panel/sidebar-toggle";
 import { Button } from "@/components/ui/button";
 import { useSidebar } from "@/hooks/use-sidebar";
 import { useStore } from "@/hooks/use-store";
@@ -20,7 +19,7 @@ export function Sidebar() {
         settings.disabled && "hidden"
       )}
     >
-      
+
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
@@ -34,7 +33,7 @@ export function Sidebar() {
           variant="link"
           asChild
         >
-          <Link href="/dashboard" className="flex items-center gap-2">
+          <Link href="/#" className="flex items-center gap-2">
             <PanelsTopLeft className="w-6 h-6 mr-1" />
             <h1
               className={cn(
