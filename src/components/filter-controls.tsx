@@ -1,5 +1,6 @@
-"use client"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -8,46 +9,58 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import api_data from '../json-data/task-data.json'
+} from "@/components/ui/select";
+import api_data from '../json-data/task-data.json';
+
+
+const downloadImage = async (base64String:string): Promise<void>  => {
+  try {
+    if (!base64String) {
+      throw new Error('Invalid response: Missing "base64_string"');
+    }
+
+    const blob = await fetch(`data:image/png;base64,${base64String}`).then(res => res.blob());
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'downloaded-image.png';
+    a.click();
+    
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Error downloading the image:');
+    alert('Failed to download the image. Please try again later.');
+  }
+};
 
 const handleDownload = async () => {
+  const apiSecret = api_data.api_secret;
+  const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  const apiUrl = 'https://testd5-img.azurewebsites.net/api/imgdownload';
+
   try {
-
-    const apiSecret = api_data.api_secret;
-    const proxyUrl = 'http://localhost:8080/';
-    const apiUrl = 'https://testd5-img.azurewebsites.net/api/imgdownload';
-
     const response = await fetch(proxyUrl + apiUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ api: apiSecret }),
     });
 
+
     if (!response.ok) {
-      throw new Error('Failed to fetch image. Status: ' + response.status);
+      throw new Error(`Failed to fetch image. Status: ${response.status}`);
     }
 
     const data = await response.json();
     console.log('API Response:', data);
 
+    const { base64_string: base64String } = data;
+    
 
-    const base64String = data.base64_string;
-    if (!base64String) {
-      throw new Error('Invalid response: Missing "base64_string" key');
-    }
-
-    const blob = await fetch(`data:image/png;base64,${base64String}`).then((res) => res.blob());
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'downloaded-image.png';
-    a.click();
-    URL.revokeObjectURL(url);
+    await downloadImage(base64String);
   } catch (error) {
-    console.error('Error downloading the image:');
+    console.error('Error during image download process:');
+    alert('Failed to initiate image download. Please try again later.');
   }
 };
 
@@ -68,32 +81,23 @@ export function FilterControls() {
           </SelectContent>
         </Select>
 
-        <Select >
+
+        <Select>
           <SelectTrigger className="w-full md:w-[200px] justify-between">
             <SelectValue placeholder="Multiple Selected" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Groups</SelectLabel>
-              <SelectItem value="all-users">
-                All Users (400)
-              </SelectItem>
-              <SelectItem value="managers">
-                Managers (14)
-              </SelectItem>
-              <SelectItem value="trainers">
-                Trainers (4)
-              </SelectItem>
+              <SelectItem value="all-users">All Users (400)</SelectItem>
+              <SelectItem value="managers">Managers (14)</SelectItem>
+              <SelectItem value="trainers">Trainers (4)</SelectItem>
             </SelectGroup>
 
             <SelectGroup>
               <SelectLabel>Users</SelectLabel>
-              <SelectItem value="adrian-lu">
-                Adrian Lu
-              </SelectItem>
-              <SelectItem value="evelyn-hamilton">
-                Evelyn Hamilton
-              </SelectItem>
+              <SelectItem value="adrian-lu">Adrian Lu</SelectItem>
+              <SelectItem value="evelyn-hamilton">Evelyn Hamilton</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -108,10 +112,11 @@ export function FilterControls() {
             <SelectItem value="compliance">Compliance</SelectItem>
           </SelectContent>
         </Select>
+
         <Button variant="outline" onClick={handleDownload}>
           Download
         </Button>
       </div>
     </div>
-  )
+  );
 }
